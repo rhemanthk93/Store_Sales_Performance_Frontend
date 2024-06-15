@@ -1,29 +1,26 @@
 // src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
-import Insight1 from './pages/Insight1';
-import Insight2 from './pages/Insight2';
-import Insight3 from './pages/Insight3';
-import './App.css';
+import Sidebar from './components/Sidebar';
+import HighestPerHourSalesByCity from './pages/HighestPerHourSalesByCity';
 
-function App() {
+const App = () => {
     return (
         <Router>
             <div className="App">
                 <Sidebar />
-                <Dashboard>
+                <div className="content">
                     <Routes>
-                        <Route path="/insight1" element={<Insight1 />} />
-                        <Route path="/insight2" element={<Insight2 />} />
-                        <Route path="/insight3" element={<Insight3 />} />
-                        <Route path="/" element={<h2>Welcome to the Order Management Dashboard</h2>} />
+                        <Route path="/" element={<Dashboard />} />
+                        <Route path="/highest_per_hour_sales_by_city" element={<HighestPerHourSalesByCity />} />
+                        <Route path="/insight2" element={<h2>Insight 2</h2>} />
+                        <Route path="/insight3" element={<h2>Insight 3</h2>} />
                     </Routes>
-                </Dashboard>
+                </div>
             </div>
         </Router>
     );
-}
+};
 
 export default App;

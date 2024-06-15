@@ -6,10 +6,10 @@ import './Sidebar.css';
 const Sidebar = () => {
     return (
         <div className="sidebar">
-            <h2>Insights</h2>
+            <NavLink to="/" className="title">Insights</NavLink>
             <ul>
                 <li>
-                    <NavLink to="/insight1" activeClassName="active">Insight 1</NavLink>
+                    <NavLink to="/highest_per_hour_sales_by_city" activeClassName="active">Highest Per Hour Sales By City</NavLink>
                 </li>
                 <li>
                     <NavLink to="/insight2" activeClassName="active">Insight 2</NavLink>

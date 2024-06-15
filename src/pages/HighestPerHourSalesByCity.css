@@ -1,0 +1,34 @@
+/* src/pages/HighestPerHourSalesByCity.css */
+.insight-container {
+    padding: 20px;
+    margin-left: 220px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.currency-toggle, .display-count-toggle {
+    display: flex;
+}
+
+.currency-toggle button, .display-count-toggle button {
+    margin: 0 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.currency-toggle button.active, .display-count-toggle button:hover {
+    background-color: #ccc;
+}
+
+.chart {
+    margin-top: 20px;
+}

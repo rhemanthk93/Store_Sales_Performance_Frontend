@@ -13,14 +13,4 @@ export const getHighestPerHourSales = async () => {
     }
 };
 
-export const getHighestAvgSales = async () => {
-    try {
-        const response = await axios.get(`${API_URL}/highest_avg_sales_by_city`);
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching highest average sales:', error);
-        throw error;
-    }
-};
-
 // Add more API calls as needed
