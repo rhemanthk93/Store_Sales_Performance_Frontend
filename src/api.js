@@ -23,4 +23,12 @@ export const getCityAvgSalesWithDistrict = async () => {
     }
 };
 
-// Add more API calls as needed
+export const getTimeBasedSalesTrendByCity = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/time_based_sales_trend_by_city`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching time-based sales trend:', error);
+        throw error;
+    }
+};
