@@ -12,6 +12,7 @@ const ChartDropdown = ({ onSelect }) => {
                 <option value="timeBasedOrderTrendByCity">Time-Based Order Trend by City</option>
                 <option value="ordersByRegion">Orders by Region</option>
                 <option value="salesTiers">City Sales Tiers</option>
+                <option value="orderTimingClustering">Order Timing Clustering</option>
             </select>
         </div>
     );

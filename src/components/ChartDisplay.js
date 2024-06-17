@@ -1,4 +1,3 @@
-// src/components/ChartDisplay.js
 import React, { useState } from 'react';
 import CityPerHourSalesChart from './CityPerHourSalesChart';
 import CityAvgSalesWithDistrictChart from './CityAvgSalesWithDistrictChart';
@@ -6,6 +5,7 @@ import TimeBasedSalesTrendByCityChart from './TimeBasedSalesTrendByCityChart';
 import TimeBasedOrderTrendByCityChart from './TimeBasedOrderTrendByCityChart';
 import OrdersByRegionChart from './OrdersByRegionChart';
 import SalesTiersChart from './SalesTiersChart';
+import OrderTimingClusteringChart from './OrderTimingClusteringChart';
 import './ChartDisplay.css';
 
 const ChartDisplay = ({ selectedChart }) => {
@@ -23,6 +23,8 @@ const ChartDisplay = ({ selectedChart }) => {
                 return <OrdersByRegionChart />;
             case 'salesTiers':
                 return <SalesTiersChart />;
+            case 'orderTimingClustering':
+                return <OrderTimingClusteringChart />;
             default:
                 return <CityPerHourSalesChart />;
         }

@@ -62,3 +62,13 @@ export const getSalesTiers = async () => {
         throw error;
     }
 };
+
+export const getOrderTimingClustering = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/order_timing_tiers`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching order timing clustering:', error);
+        throw error;
+    }
+};
