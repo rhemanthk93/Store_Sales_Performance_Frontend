@@ -1,0 +1,9 @@
+/* src/components/SalesTiersChart.css */
+.chart-container {
+    width: 30%; /* Adjust this value to control the size of the chart */
+    margin: 0 auto;
+}
+
+h2, p {
+    text-align: center;
+}

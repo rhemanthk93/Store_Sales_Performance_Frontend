@@ -52,3 +52,13 @@ export const getOrdersByRegion = async () => {
         throw error;
     }
 };
+
+export const getSalesTiers = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/sales_tiers`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching sales tiers:', error);
+        throw error;
+    }
+};

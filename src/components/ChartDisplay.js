@@ -1,10 +1,12 @@
 // src/components/ChartDisplay.js
-import React from 'react';
+import React, { useState } from 'react';
 import CityPerHourSalesChart from './CityPerHourSalesChart';
 import CityAvgSalesWithDistrictChart from './CityAvgSalesWithDistrictChart';
 import TimeBasedSalesTrendByCityChart from './TimeBasedSalesTrendByCityChart';
 import TimeBasedOrderTrendByCityChart from './TimeBasedOrderTrendByCityChart';
 import OrdersByRegionChart from './OrdersByRegionChart';
+import SalesTiersChart from './SalesTiersChart';
+import './ChartDisplay.css';
 
 const ChartDisplay = ({ selectedChart }) => {
     const renderChart = () => {
@@ -13,22 +15,20 @@ const ChartDisplay = ({ selectedChart }) => {
                 return <CityPerHourSalesChart />;
             case 'cityAvgSalesWithDistrict':
                 return <CityAvgSalesWithDistrictChart />;
-            case 'timeBasedSalesTrend':
+            case 'timeBasedSalesTrendByCity':
                 return <TimeBasedSalesTrendByCityChart />;
             case 'timeBasedOrderTrendByCity':
                 return <TimeBasedOrderTrendByCityChart />;
             case 'ordersByRegion':
                 return <OrdersByRegionChart />;
+            case 'salesTiers':
+                return <SalesTiersChart />;
             default:
                 return <CityPerHourSalesChart />;
         }
     };
 
-    return (
-        <div>
-            {renderChart()}
-        </div>
-    );
+    return <div className="chart-display">{renderChart()}</div>;
 };
 
 export default ChartDisplay;
