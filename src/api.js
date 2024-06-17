@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const API_URL = 'http://127.0.0.1:5000';
 
-export const getHighestPerHourSales = async () => {
+export const getHighestPerHourSalesByCity = async () => {
     try {
         const response = await axios.get(`${API_URL}/highest_per_hour_sales_by_city`);
         return response.data;

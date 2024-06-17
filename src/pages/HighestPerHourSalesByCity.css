@@ -1,0 +1,29 @@
+.insight-container {
+    margin: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.currency-toggle button,
+.display-count-toggle button {
+    margin: 0 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.currency-toggle button.active,
+.display-count-toggle button.active {
+    background-color: #0056b3;
+}
+
+.chart {
+    max-width: 800px;
+    margin: 0 auto;
+}
