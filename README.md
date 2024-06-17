@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# Store Sales Performance Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the frontend part of the Store Sales Performance application, built with React. It provides various visualizations and insights into store sales data.
 
-## Available Scripts
+## Prerequisites
 
-In the project directory, you can run:
+- Node.js (>=14.0.0)
+- npm (>=6.0.0) or yarn (>=1.0.0)
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. **Clone the repository:**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+   ```bash
+   git clone <repository-url>
+   cd store_sales_performance_frontend
+   npm install
+   npm start
 
-### `npm test`
+The application should now be running on http://localhost:3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Project Structure
 
-### `npm run build`
+	•	src/components: Contains the React components used in the application.
+	•	ChartDisplay.js, ChartDisplay.css: Main chart display component.
+	•	ChartDropdown.js, ChartDropdown.css: Dropdown component to select different charts.
+	•	CityAvgSalesWithDistrictChart.js: Chart showing average sales by city with district information.
+	•	CityPerHourSalesChart.js: Chart showing average per hour sales by city.
+	•	Header.js, Header.css: Header component.
+	•	OrdersByRegionChart.js: Chart showing orders by region.
+	•	OrderTimingClusteringChart.js: Chart showing order timing clusters.
+	•	SalesTiersChart.js, SalesTiersChart.css: Chart showing sales tiers by city.
+	•	TimeBasedOrderTrendByCityChart.js: Chart showing time-based order trends by city.
+	•	TimeBasedSalesTrendByCityChart.js: Chart showing time-based sales trends by city.
+	•	src/api: Contains the API calls to the backend.
+	•	src/css: Contains the CSS files for styling components.
+	•	public: Contains the public assets of the application, including the index.html.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ Dependencies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+	•	react
+	•	react-dom
+	•	react-scripts
+	•	chart.js
+	•	react-chartjs-2
+	•	chartjs-plugin-datalabels
+	•	axios
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+API Endpoints
 
-### `npm run eject`
+The frontend communicates with the backend using the following endpoints:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+	•	/city_per_hour_sales: Fetches highest per hour sales by city.
+	•	/city_avg_sales_with_district: Fetches average sales by city with district information.
+	•	/time_based_sales_trend_by_city: Fetches time-based sales trends by city.
+	•	/time_based_order_trend_by_city: Fetches time-based order trends by city.
+	•	/orders_by_region: Fetches orders by region.
+	•	/sales_tiers: Fetches sales tiers by city.
+	•	/order_timing_tiers: Fetches order timing clusters.
+	•	/orders_by_city_currency: Fetches orders by city and currency.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Charts and Visualizations
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The frontend provides several charts and visualizations, including:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+	•	City With Average Per Hour Sales: Displays the cities with the average hourly sales from 5am to 12pm. The data is presented in both USD and RMB.
+	•	City With Average Sales: Displays the cities with the average sales across all the orders. Hover over or click on the bars to see the districts associated with each city.
+	•	Time-Based Sales Trend By City: Displays the sales trend for different cities from 5am to 12pm.
+	•	Time-Based Order Trend by City: Displays the order trend for different cities from 5am to 12pm.
+	•	Orders by Region: Displays the number of orders by region.
+	•	City Sales Tiers: Displays the sales tiers by city.
+	•	Order Timing Clusters: Displays the clusters of order timings.
 
-## Learn More
+Usage
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Users can interact with these charts to gain insights into the store sales performance. The controls allow switching between different currencies (USD and RMB) and filtering the number of top-performing cities.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+ 
