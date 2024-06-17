@@ -42,3 +42,13 @@ export const getTimeBasedOrderTrendByCity = async () => {
         throw error;
     }
 };
+
+export const getOrdersByRegion = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/orders_by_region`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching orders by region:', error);
+        throw error;
+    }
+};
