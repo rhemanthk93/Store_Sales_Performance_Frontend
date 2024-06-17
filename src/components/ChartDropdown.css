@@ -1,0 +1,14 @@
+.chart-dropdown {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.chart-dropdown label {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+.chart-dropdown select {
+    padding: 5px 10px;
+    font-size: 1em;
+}
