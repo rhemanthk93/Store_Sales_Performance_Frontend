@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { getCityAvgSalesWithDistrict } from '../api';
+import 'chartjs-plugin-datalabels';
 import './ChartDisplay.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -40,7 +41,7 @@ const CityAvgSalesWithDistrictChart = () => {
         datasets: [
             {
                 label: `Average Sales (${currency})`,
-                data: filterData(data).map(d => currency === 'USD' ? d.avg_sales_usd : d.avg_sales_rmb),
+                data: filterData(data).map(d => currency === 'USD' ? Math.round(d.avg_sales_usd) : Math.round(d.avg_sales_rmb)),
                 backgroundColor: currency === 'USD' ? 'rgba(75,192,192,0.4)' : 'rgba(255,99,132,0.4)',
                 borderColor: currency === 'USD' ? 'rgba(75,192,192,1)' : 'rgba(255,99,132,1)',
                 borderWidth: 1,
@@ -56,10 +57,19 @@ const CityAvgSalesWithDistrictChart = () => {
                     label: function (context) {
                         const dataIndex = context.dataIndex;
                         const districts = data[dataIndex].districts.join(', ');
-                        return `${context.label}: ${context.raw} ${currency}\nDistricts: ${districts}`;
+                        const value = Math.round(context.raw); // Round to nearest whole number
+                        return `${context.label}: ${value} ${currency}\nDistricts: ${districts}`;
                     }
                 }
             },
+            datalabels: {
+                display: true,
+                formatter: function (value) {
+                    return Math.round(value); // Round to nearest whole number
+                },
+                anchor: 'end',
+                align: 'top',
+            }
         },
         scales: {
             x: {
@@ -68,6 +78,11 @@ const CityAvgSalesWithDistrictChart = () => {
             },
             y: {
                 beginAtZero: true,
+                ticks: {
+                    callback: function (value) {
+                        return Math.round(value); // Ensure y-axis values are rounded
+                    }
+                }
             }
         }
     };

@@ -1,4 +1,3 @@
-// src/components/TimeBasedSalesTrendByCityChart.js
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -50,7 +49,7 @@ const TimeBasedSalesTrendByCityChart = () => {
                 label: city,
                 data: hours.map(hour => {
                     const hourData = cityData.find(d => d.hour === hour);
-                    return hourData ? (currency === 'USD' ? hourData.total_sales_usd : hourData.total_sales_rmb) : 0;
+                    return hourData ? Math.round(currency === 'USD' ? hourData.total_sales_usd : hourData.total_sales_rmb) : 0;
                 }),
                 fill: false,
                 borderColor: getRandomColor(),
@@ -73,6 +72,34 @@ const TimeBasedSalesTrendByCityChart = () => {
         return color;
     };
 
+    const options = {
+        responsive: true,
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        const value = Math.round(context.raw); // Round to nearest whole number
+                        return `${context.dataset.label}: ${value} ${currency}`;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: {
+                type: 'category',
+                labels: Array.from({ length: 8 }, (_, i) => `${i + 5}:00 - ${i + 6}:00`), // ["5:00 - 6:00", ..., "12:00 - 13:00"]
+            },
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function (value) {
+                        return Math.round(value); // Ensure y-axis values are rounded
+                    }
+                }
+            }
+        }
+    };
+
     return (
         <div className="chart-display">
             <h2>Time-Based Sales Trend</h2>
@@ -93,7 +120,7 @@ const TimeBasedSalesTrendByCityChart = () => {
             </div>
             {data && (
                 <div className="chart">
-                    <Line data={processChartData(data)} />
+                    <Line data={processChartData(data)} options={options} />
                 </div>
             )}
         </div>

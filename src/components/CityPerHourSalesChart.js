@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { getCityPerHourSales } from '../api';
+import 'chartjs-plugin-datalabels';
 import './ChartDisplay.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -48,6 +49,55 @@ const CityPerHourSalesChart = () => {
         ],
     } : {};
 
+    const options = {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        const label = context.dataset.label || '';
+                        const value = Math.round(context.raw); // Round to nearest whole number
+                        return `${label}: ${value}`;
+                    }
+                }
+            },
+            title: {
+                display: true,
+                text: 'Orders by City and Currency (Top 10 by USD Ratio)',
+            },
+            datalabels: {
+                display: true,
+                formatter: function(value, context) {
+                    return Math.round(value); // Round to nearest whole number
+                },
+                anchor: 'end',
+                align: 'top',
+            }
+        },
+        responsive: true,
+        scales: {
+            x: {
+                stacked: true,
+                title: {
+                    display: true,
+                    text: 'Cities'
+                }
+            },
+            y: {
+                stacked: true,
+                title: {
+                    display: true,
+                    text: 'Average Hourly Sales'
+                },
+                ticks: {
+                    beginAtZero: true,
+                    callback: function(value) {
+                        return Math.round(value); // Ensure y-axis values are rounded
+                    }
+                }
+            }
+        }
+    };
+
     return (
         <div className="chart-display">
             <h2>City With Average Per Hour Sales</h2>
@@ -67,7 +117,7 @@ const CityPerHourSalesChart = () => {
             </div>
             {data && (
                 <div className="chart">
-                    <Bar data={chartData} />
+                    <Bar data={chartData} options={options} />
                 </div>
             )}
         </div>
