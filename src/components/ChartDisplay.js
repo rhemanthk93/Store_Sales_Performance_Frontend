@@ -2,7 +2,8 @@
 import React from 'react';
 import CityPerHourSalesChart from './CityPerHourSalesChart';
 import CityAvgSalesWithDistrictChart from './CityAvgSalesWithDistrictChart';
-import TimeBasedSalesTrendByCityChart from "./TimeBasedSalesTrendByCityChart";
+import TimeBasedSalesTrendByCityChart from './TimeBasedSalesTrendByCityChart';
+import TimeBasedOrderTrendByCityChart from './TimeBasedOrderTrendByCityChart';
 
 const ChartDisplay = ({ selectedChart }) => {
     const renderChart = () => {
@@ -13,6 +14,8 @@ const ChartDisplay = ({ selectedChart }) => {
                 return <CityAvgSalesWithDistrictChart />;
             case 'timeBasedSalesTrendByCity':
                 return <TimeBasedSalesTrendByCityChart />;
+            case 'timeBasedOrderTrendByCity':
+                return <TimeBasedOrderTrendByCityChart />;
             default:
                 return <CityPerHourSalesChart />;
         }

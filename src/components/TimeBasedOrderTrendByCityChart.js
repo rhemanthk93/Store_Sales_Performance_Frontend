@@ -1,24 +1,23 @@
-// src/components/TimeBasedSalesTrendByCityChart.js
+// src/components/TimeBasedOrderTrendByCityChart.js
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import { getTimeBasedSalesTrendByCity } from '../api';
+import { getTimeBasedOrderTrendByCity } from '../api';
 import './ChartDisplay.css';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-const TimeBasedSalesTrendByCityChart = () => {
+const TimeBasedOrderTrendByCityChart = () => {
     const [data, setData] = useState(null);
-    const [currency, setCurrency] = useState('USD');
     const [displayCount, setDisplayCount] = useState('top100');
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const salesData = await getTimeBasedSalesTrendByCity();
+                const salesData = await getTimeBasedOrderTrendByCity();
                 setData(salesData);
             } catch (error) {
-                console.error('Error fetching time-based sales trend:', error);
+                console.error('Error fetching time-based order trend:', error);
             }
         };
 
@@ -50,7 +49,7 @@ const TimeBasedSalesTrendByCityChart = () => {
                 label: city,
                 data: hours.map(hour => {
                     const hourData = cityData.find(d => d.hour === hour);
-                    return hourData ? (currency === 'USD' ? hourData.total_sales_usd : hourData.total_sales_rmb) : 0;
+                    return hourData ? hourData.order_count : 0;
                 }),
                 fill: false,
                 borderColor: getRandomColor(),
@@ -75,15 +74,11 @@ const TimeBasedSalesTrendByCityChart = () => {
 
     return (
         <div className="chart-display">
-            <h2>Time-Based Sales Trend</h2>
+            <h2>Time-Based Order Trend by City</h2>
             <p>
-                This line chart displays the sales trend for different cities from 5am to 12pm. Users can toggle between USD and RMB to see the sales in the desired currency.
+                This line chart displays the order trend for different cities from 5am to 12pm.
             </p>
             <div className="controls">
-                <div className="currency-toggle">
-                    <button onClick={() => setCurrency('USD')} className={currency === 'USD' ? 'active' : ''}>USD</button>
-                    <button onClick={() => setCurrency('RMB')} className={currency === 'RMB' ? 'active' : ''}>RMB</button>
-                </div>
                 <div className="display-count-toggle">
                     <button onClick={() => setDisplayCount('top5')} className={displayCount === 'top5' ? 'active' : ''}>Top 5</button>
                     <button onClick={() => setDisplayCount('top10')} className={displayCount === 'top10' ? 'active' : ''}>Top 10</button>
@@ -100,4 +95,4 @@ const TimeBasedSalesTrendByCityChart = () => {
     );
 };
 
-export default TimeBasedSalesTrendByCityChart;
+export default TimeBasedOrderTrendByCityChart;

@@ -32,3 +32,13 @@ export const getTimeBasedSalesTrendByCity = async () => {
         throw error;
     }
 };
+
+export const getTimeBasedOrderTrendByCity = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/time_based_order_trend_by_city`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching time-based order trend:', error);
+        throw error;
+    }
+};
