@@ -6,9 +6,8 @@ const ChartDropdown = ({ onSelect }) => {
         <div className="chart-dropdown">
             <label htmlFor="chart-select">Select Chart: </label>
             <select id="chart-select" onChange={(e) => onSelect(e.target.value)}>
-                <option value="highestPerHourSalesByCity">City With Highest Average Per Hour Sales</option>
-                <option value="highestAvgSalesByDistrict">Highest Average Sales By District</option>
-                {/* Add more options as needed */}
+                <option value="cityPerHourSales">City With Average Per Hour Sales</option>
+                <option value="cityAvgSalesWithDistrict">City With Average Sales</option>
             </select>
         </div>
     );
