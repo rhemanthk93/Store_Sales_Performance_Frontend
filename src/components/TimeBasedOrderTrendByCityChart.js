@@ -24,26 +24,25 @@ const TimeBasedOrderTrendByCityChart = () => {
         fetchData();
     }, []);
 
-    const filterData = (data) => {
-        if (!data) return [];
-        if (displayCount === 'top5') {
-            return data.slice(0, 5);
-        } else if (displayCount === 'top10') {
-            return data.slice(0, 10);
-        } else if (displayCount === 'top100') {
-            return data.slice(0, 100);
-        } else {
-            return data;
-        }
-    };
-
     const processChartData = (data) => {
         if (!data) return {};
 
         const hours = Array.from({ length: 8 }, (_, i) => i + 5); // [5, 6, 7, ..., 12]
-        const cities = [...new Set(filterData(data).map(d => d.city))];
+        const cities = [...new Set(data.map(d => d.city))];
 
-        const datasets = cities.map(city => {
+        const cityOrderCounts = cities.map(city => {
+            const cityData = data.filter(d => d.city === city);
+            const totalOrders = cityData.reduce((sum, d) => sum + d.order_count, 0);
+            return { city, totalOrders };
+        });
+
+        // Sort cities based on total orders
+        cityOrderCounts.sort((a, b) => b.totalOrders - a.totalOrders);
+
+        // Filter cities based on the displayCount
+        const filteredCities = filterData(cityOrderCounts).map(d => d.city);
+
+        const datasets = filteredCities.map(city => {
             const cityData = data.filter(d => d.city === city);
             return {
                 label: city,
@@ -61,6 +60,18 @@ const TimeBasedOrderTrendByCityChart = () => {
             labels: hours.map(hour => `${hour}:00 - ${hour + 1}:00`),
             datasets: datasets,
         };
+    };
+
+    const filterData = (cityOrderCounts) => {
+        if (displayCount === 'top5') {
+            return cityOrderCounts.slice(0, 5);
+        } else if (displayCount === 'top10') {
+            return cityOrderCounts.slice(0, 10);
+        } else if (displayCount === 'top100') {
+            return cityOrderCounts.slice(0, 100);
+        } else {
+            return cityOrderCounts;
+        }
     };
 
     const getRandomColor = () => {
