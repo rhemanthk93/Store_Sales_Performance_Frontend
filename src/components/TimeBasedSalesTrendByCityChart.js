@@ -1,3 +1,4 @@
+// src/components/TimeBasedSalesTrendByCityChart.js
 import React, { useEffect, useState } from 'react';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
 import { Line } from 'react-chartjs-2';
@@ -26,15 +27,29 @@ const TimeBasedSalesTrendByCityChart = () => {
 
     const filterData = (data) => {
         if (!data) return [];
-        if (displayCount === 'top5') {
-            return data.slice(0, 5);
-        } else if (displayCount === 'top10') {
-            return data.slice(0, 10);
-        } else if (displayCount === 'top100') {
-            return data.slice(0, 100);
-        } else {
-            return data;
-        }
+
+        // Calculate total sales for each city
+        const citySales = data.reduce((acc, d) => {
+            const city = d.city;
+            const sales = currency === 'USD' ? d.total_sales_usd : d.total_sales_rmb;
+            if (!acc[city]) {
+                acc[city] = 0;
+            }
+            acc[city] += sales;
+            return acc;
+        }, {});
+
+        // Convert the citySales object to an array and sort by total sales
+        const sortedCities = Object.keys(citySales).map(city => ({
+            city,
+            totalSales: citySales[city],
+        })).sort((a, b) => b.totalSales - a.totalSales);
+
+        // Filter top cities based on displayCount
+        const topCities = sortedCities.slice(0, displayCount === 'top5' ? 5 : displayCount === 'top10' ? 10 : displayCount === 'top100' ? 100 : sortedCities.length);
+
+        // Get the data for the filtered cities
+        return data.filter(d => topCities.map(c => c.city).includes(d.city));
     };
 
     const processChartData = (data) => {
